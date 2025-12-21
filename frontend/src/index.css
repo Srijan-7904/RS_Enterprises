@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+	--font-main: 'Poppins', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+html, body {
+	font-family: var(--font-main);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-weight: 500;
+}
+
+/* Make headings and key UI elements more bold-ish */
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 700;
+}
+
+button, .btn, input, select, textarea {
+	font-weight: 600;
+}
+
+/* Utility: slightly increase default letter spacing for better bold display */
+body { letter-spacing: 0.2px }
