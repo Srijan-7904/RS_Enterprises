@@ -18,6 +18,7 @@ function Registration() {
     let { serverUrl } = useContext(authDataContext)
     let [name, setName] = useState("")
     let [email, setEmail] = useState("")
+    let [phone, setPhone] = useState("")
     let [password, setPassword] = useState("")
     let { userdata, getCurrentUser } = useContext(userDataContext)
     let [loading, setLoading] = useState(false)
@@ -30,7 +31,7 @@ const handleSignup = async (e) => {
 
     console.log("Sending =>", {name, email, password});
 
-    if (!name || !email || !password) {
+    if (!name || !email || !phone || !password) {
         toast.error("All fields required");
         setLoading(false);
         return;
@@ -39,7 +40,7 @@ const handleSignup = async (e) => {
     try {
         const result = await axios.post(
             serverUrl + '/api/auth/registration',
-            { name, email, password },
+            { name, email, phone, password },
             { withCredentials: true, headers: { "Content-Type": "application/json" } }
         );
 
@@ -100,6 +101,7 @@ const handleSignup = async (e) => {
 
                         <input autoFocus id='signup-name' name='name' type='text' className='w-full h-[48px] border-[2px] border-[#b8dce8] rounded-lg bg-[#f5f9fc] placeholder-[#5a8899] px-4 font-semibold text-[#0a5f7a] focus:outline-none focus:border-[#1488aa] focus:shadow-[0_0_20px_rgba(20,136,170,0.2)] transition-all' placeholder='UserName' required onChange={(e)=>setName(e.target.value)} value={name} aria-label='User name' />
                         <input id='signup-email' name='email' type='email' className='w-full h-[48px] border-[2px] border-[#b8dce8] rounded-lg bg-[#f5f9fc] placeholder-[#5a8899] px-4 font-semibold text-[#0a5f7a] focus:outline-none focus:border-[#1488aa] focus:shadow-[0_0_20px_rgba(20,136,170,0.2)] transition-all' placeholder='Email' required onChange={(e)=>setEmail(e.target.value)} value={email} autoComplete='email' aria-label='Email' />
+                        <input id='signup-phone' name='phone' type='tel' className='w-full h-[48px] border-[2px] border-[#b8dce8] rounded-lg bg-[#f5f9fc] placeholder-[#5a8899] px-4 font-semibold text-[#0a5f7a] focus:outline-none focus:border-[#1488aa] focus:shadow-[0_0_20px_rgba(20,136,170,0.2)] transition-all' placeholder='Phone Number' required onChange={(e)=>setPhone(e.target.value)} value={phone} autoComplete='tel' aria-label='Phone number' />
 
                         <div className='relative'>
                             <input id='signup-password' name='password' type={show?"text":"password"} className='w-full h-[48px] border-[2px] border-[#b8dce8] rounded-lg bg-[#f5f9fc] placeholder-[#5a8899] px-4 font-semibold text-[#0a5f7a] focus:outline-none focus:border-[#1488aa] focus:shadow-[0_0_20px_rgba(20,136,170,0.2)] transition-all' placeholder='Password' required onChange={(e)=>setPassword(e.target.value)} value={password} autoComplete='new-password' aria-label='Password' />

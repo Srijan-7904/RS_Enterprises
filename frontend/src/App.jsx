@@ -3,6 +3,8 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Registration from './pages/Registration'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import ForgotPassword from './pages/ForgotPassword'
+import ResetPassword from './pages/ResetPassword'
 import Nav from './component/Nav'
 import { userDataContext } from './context/UserContext'
 import About from './pages/About'
@@ -34,6 +36,10 @@ let location = useLocation()
         <Route path='/signup' 
         element={userData ? (<Navigate to={location.state?.from || "/"}/> ) 
         : (<Registration/>)}/>
+
+        <Route path='/forgot-password' element={<ForgotPassword/>}/>
+        
+        <Route path='/reset-password/:token' element={<ResetPassword/>}/>
 
         <Route path='/' 
         element={userData ? <Home/> : <Navigate to="/login" state={{from: location.pathname}} /> }/>

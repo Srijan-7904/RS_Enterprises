@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/logo.png';
 
 import { IoSearchOutline, IoSearchSharp } from "react-icons/io5";
@@ -133,7 +133,7 @@ function Nav() {
   };
 
   return (
-    <div className='w-[100vw] z-10 fixed top-0 nav-glass border-b border-[#b8dce8] shadow-[0_2px_10px_rgba(20,136,170,0.1)] bg-white/95 backdrop-blur-sm'>
+    <div className='w-[100vw] z-[50] fixed top-0 nav-glass border-b border-[#b8dce8] shadow-[0_2px_10px_rgba(20,136,170,0.1)] bg-white/95 backdrop-blur-sm'>
       {/* Main Navigation */}
       <div className='h-[80px] flex items-center justify-between px-[20px] lg:px-[40px]'>
         
@@ -145,10 +145,10 @@ function Nav() {
           whileTap={{ scale: 0.95 }}
         >
           <img src={logo} alt="logo" className='w-[40px] h-[40px]' />
-          <h1 className='text-[20px] font-extrabold hidden sm:flex bg-gradient-to-r from-[#65d8f7] via-[#00d4ff] to-[#65d8f7] bg-clip-text text-transparent'>RS Enterprises</h1>
+          <h1 className='text-[20px] font-extrabold flex bg-gradient-to-r from-[#65d8f7] via-[#00d4ff] to-[#65d8f7] bg-clip-text text-transparent'>RS Enterprises</h1>
         </motion.div>
 
-        {/* DESKTOP MENU */}
+        {/* MENU */}
         <div className='hidden md:flex items-center gap-[15px]'>
           {[
             { path: "/", label: "HOME", icon: null },
@@ -175,20 +175,6 @@ function Nav() {
         {/* RIGHT SECTION */}
         <div className='flex items-center gap-[20px]'>
           
-          {/* Theme Toggle */}
-          <motion.button
-            whileHover={{ scale: 1.1, rotate: 15 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={toggleTheme}
-            className='cursor-pointer'
-          >
-            {theme === 'light' ? (
-              <FaMoon className='w-[24px] h-[24px] text-[#1488aa] hover:text-[#0a5f7a] transition-colors' />
-            ) : (
-              <FaSun className='w-[24px] h-[24px] text-[#fbbc04] hover:text-[#f59e0b] transition-colors' />
-            )}
-          </motion.button>
-          
           {/* Search Icon */}
           <motion.div
             whileHover={{ scale: 1.1 }}
@@ -207,7 +193,7 @@ function Nav() {
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className='cursor-pointer'
+            className='cursor-pointer relative z-20'
             onClick={() => setShowProfile(prev => !prev)}
           >
             {!userData ? (
@@ -226,7 +212,7 @@ function Nav() {
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className='hidden md:flex relative cursor-pointer'
+            className='flex relative cursor-pointer z-10'
             onClick={() => navigate("/cart")}
           >
             <MdOutlineShoppingCart className='w-[32px] h-[32px] text-[#1488aa] hover:text-[#0a5f7a] transition-colors' />
@@ -241,12 +227,15 @@ function Nav() {
             )}
           </motion.div>
 
-          {/* Mobile Menu Toggle */}
+          {/* Hamburger Menu Toggle */}
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className='md:hidden text-[#1488aa]'
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className='md:hidden text-[#1488aa] relative z-[100] pointer-events-auto focus:outline-none'
+            onClick={(e) => {
+              e.stopPropagation();
+              setMobileMenuOpen(prev => !prev);
+            }}
           >
             {mobileMenuOpen ? (
               <FaTimes className='w-[28px] h-[28px]' />
@@ -258,184 +247,193 @@ function Nav() {
       </div>
 
       {/* Search Bar */}
-      {showSearch && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className='fixed left-0 right-0 top-[80px] w-screen border-t border-[#b8dce8] bg-white shadow-md py-[20px] z-50'
-        >
-          <div className='relative w-[100vw] flex flex-col items-center justify-center gap-[15px]'>
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={onSearchKeyDown}
-              placeholder="Search products, categories..."
-              autoFocus
-              className='w-[90vw] lg:w-[85vw] h-[48px] bg-white border-2 border-[#1488aa]/40 rounded-[25px] px-[20px] text-[#0a5f7a] text-[16px] placeholder:text-[#5a8899] focus:outline-none focus:border-[#1488aa] focus:shadow-[0_0_20px_rgba(20,136,170,0.2)] transition-all'
-            />
-          </div>
+      <AnimatePresence>
+        {showSearch && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className='fixed left-0 right-0 top-[80px] w-screen border-t border-[#b8dce8] bg-white shadow-md py-[20px] z-[60]'
+          >
+            <div className='relative w-[100vw] flex flex-col items-center justify-center gap-[15px]'>
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={onSearchKeyDown}
+                placeholder="Search products, categories..."
+                autoFocus
+                className='w-[90vw] lg:w-[85vw] h-[48px] bg-white border-2 border-[#1488aa]/40 rounded-[25px] px-[20px] text-[#0a5f7a] text-[16px] placeholder:text-[#5a8899] focus:outline-none focus:border-[#1488aa] focus:shadow-[0_0_20px_rgba(20,136,170,0.2)] transition-all'
+              />
+            </div>
 
-          {query.length >= 2 && suggestions.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className='w-[90vw] lg:w-[85vw] mx-auto max-h-[320px] overflow-auto bg-white text-[#0a5f7a] rounded-[15px] mt-3 shadow-lg border-2 border-[#b8dce8] absolute left-[50%] translate-x-[-50%] top-[120px]'
-            >
-              {suggestions.map((s, i) => (
-                <motion.div
-                  key={s._id}
-                  whileHover={{ backgroundColor: 'rgba(101, 216, 247, 0.1)' }}
-                  className={`flex items-center gap-3 px-4 py-3 cursor-pointer border-b border-[#65d8f7]/10 last:border-b-0 ${
-                    i === activeIndex ? 'bg-[#65d8f7]/20' : ''
-                  }`}
-                  onMouseEnter={() => setActiveIndex(i)}
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => navigateToSuggestion(s)}
-                >
-                  <img src={s.image1} alt="" className='w-12 h-12 rounded-[8px] object-cover border border-[#65d8f7]/30' />
-                  <div className='flex flex-col flex-1'>
-                    <div className='text-[14px] font-semibold'>{highlight(s.name, query)}</div>
-                    <div className='text-[12px] text-[#5a8899]'>
-                      {highlight(`${s.category || ''}${s.subCategory ? ' • ' + s.subCategory : ''}`, query)}
+            {query.length >= 2 && suggestions.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className='w-[90vw] lg:w-[85vw] mx-auto max-h-[320px] overflow-auto bg-white text-[#0a5f7a] rounded-[15px] mt-3 shadow-lg border-2 border-[#b8dce8] absolute left-[50%] translate-x-[-50%] top-[120px] z-[70]'
+              >
+                {suggestions.map((s, i) => (
+                  <motion.div
+                    key={s._id}
+                    whileHover={{ backgroundColor: 'rgba(101, 216, 247, 0.1)' }}
+                    className={`flex items-center gap-3 px-4 py-3 cursor-pointer border-b border-[#65d8f7]/10 last:border-b-0 ${
+                      i === activeIndex ? 'bg-[#65d8f7]/20' : ''
+                    }`}
+                    onMouseEnter={() => setActiveIndex(i)}
+                    onMouseDown={(e) => e.preventDefault()}
+                    onClick={() => navigateToSuggestion(s)}
+                  >
+                    <img src={s.image1} alt="" className='w-12 h-12 rounded-[8px] object-cover border border-[#65d8f7]/30' />
+                    <div className='flex flex-col flex-1'>
+                      <div className='text-[14px] font-semibold'>{highlight(s.name, query)}</div>
+                      <div className='text-[12px] text-[#5a8899]'>
+                        {highlight(`${s.category || ''}${s.subCategory ? ' • ' + s.subCategory : ''}`, query)}
+                      </div>
                     </div>
-                  </div>
-                  <div className='text-[13px] font-semibold text-[#1488aa]'>₹ {s.price}</div>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
+                    <div className='text-[13px] font-semibold text-[#1488aa]'>₹ {s.price}</div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
 
-          {query.length >= 2 && suggestions.length === 0 && (
+            {query.length >= 2 && suggestions.length === 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className='w-[90vw] lg:w-[85vw] bg-white text-[#5a8899] rounded-[15px] mt-3 shadow-lg border-2 border-[#b8dce8] py-3 text-sm text-center absolute left-[50%] translate-x-[-50%] top-[120px] z-[70]'
+              >
+                No matches. Press Enter to search all.
+              </motion.div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Hamburger Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className='w-[90vw] lg:w-[85vw] bg-white text-[#5a8899] rounded-[15px] mt-3 shadow-lg border-2 border-[#b8dce8] py-3 text-sm text-center absolute left-[50%] translate-x-[-50%] top-[120px]'
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className='fixed left-0 right-0 top-[80px] bottom-0 z-[999] bg-black/30'
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            
+            {/* Menu Panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className='fixed top-[80px] right-0 h-[calc(100vh-80px)] w-[80vw] max-w-[300px] bg-gradient-to-b from-white via-[#f8fcfd] to-[#e8f4f8] border-l-2 border-[#65d8f7] shadow-[-4px_0_30px_rgba(20,136,170,0.25)] z-[1001] overflow-y-auto'
             >
-              No matches. Press Enter to search all.
+              {/* Menu Header */}
+              <div className='px-[25px] py-[25px] border-b border-[#b8dce8] bg-gradient-to-r from-[#65d8f7]/10 to-[#00d4ff]/10'>
+                <h2 className='text-[20px] font-extrabold bg-gradient-to-r from-[#1488aa] to-[#00d4ff] bg-clip-text text-transparent'>
+                  Navigation
+                </h2>
+              </div>
+
+              {/* Menu Items */}
+              <div className='px-[20px] py-[25px] flex flex-col gap-[12px]'>
+                {[
+                  { path: "/", label: "HOME", icon: "🏠" },
+                  { path: "/collection", label: "PRODUCT", icon: "🛍️" },
+                  { path: "/about", label: "ABOUT", icon: "ℹ️" },
+                  { path: "/contact", label: "CONTACT", icon: "📧" }
+                ].map((item, i) => (
+                  <motion.button
+                    key={i}
+                    whileHover={{ x: 5, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      navigate(item.path);
+                      setMobileMenuOpen(false);
+                    }}
+                    className='group relative bg-white hover:bg-gradient-to-r hover:from-[#e8f4f8] hover:to-[#d4e9f2] text-[#1488aa] hover:text-[#0a5f7a] py-[14px] px-[18px] rounded-[12px] border-2 border-[#b8dce8] hover:border-[#65d8f7] transition-all shadow-sm hover:shadow-[0_4px_12px_rgba(20,136,170,0.15)] text-left flex items-center gap-[12px] font-semibold text-[15px]'
+                  >
+                    <span className='text-[20px]'>{item.icon}</span>
+                    <span>{item.label}</span>
+                    <span className='ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-[#65d8f7]'>→</span>
+                  </motion.button>
+                ))}
+              </div>
+
+              {/* Menu Footer */}
+              <div className='mt-auto px-[20px] pb-[25px] pt-[15px] border-t border-[#b8dce8]'>
+                <div className='text-center text-[12px] text-[#5a8899] font-medium'>
+                  <p>RS Enterprises</p>
+                  <p className='text-[11px] mt-[5px] text-[#1488aa]'>Security Solutions</p>
+                </div>
+              </div>
             </motion.div>
-          )}
-        </motion.div>
-      )}
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Profile Dropdown */}
-      {showProfile && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className='absolute top-[100%] right-[20px] lg:right-[40px] w-[220px] bg-white rounded-[15px] border border-[#b8dce8] shadow-[0_0_30px_rgba(20,136,170,0.15)] overflow-hidden'
-        >
-          <ul className='flex flex-col text-[#0a5f7a] text-[14px]'>
-            {!userData && (
+      <AnimatePresence>
+        {showProfile && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className='absolute top-[100%] right-[20px] lg:right-[40px] w-[220px] bg-white rounded-[15px] border border-[#b8dce8] shadow-[0_0_30px_rgba(20,136,170,0.15)] overflow-hidden z-[40]'
+          >
+            <ul className='flex flex-col text-[#0a5f7a] text-[14px]'>
+              {!userData && (
+                <motion.li
+                  whileHover={{ backgroundColor: 'rgba(232, 244, 248, 0.8)' }}
+                  className='px-[15px] py-[12px] cursor-pointer border-b border-[#b8dce8] font-semibold transition-colors'
+                  onClick={() => {
+                    navigate("/login");
+                    setShowProfile(false);
+                  }}
+                >
+                  🔐 Login
+                </motion.li>
+              )}
+
+              {userData && (
+                <motion.li
+                  whileHover={{ backgroundColor: 'rgba(232, 244, 248, 0.8)' }}
+                  className='px-[15px] py-[12px] cursor-pointer border-b border-[#b8dce8] font-semibold transition-colors'
+                  onClick={handleLogout}
+                >
+                  🚪 Logout
+                </motion.li>
+              )}
+
               <motion.li
                 whileHover={{ backgroundColor: 'rgba(232, 244, 248, 0.8)' }}
                 className='px-[15px] py-[12px] cursor-pointer border-b border-[#b8dce8] font-semibold transition-colors'
                 onClick={() => {
-                  navigate("/login");
+                  navigate("/order");
                   setShowProfile(false);
                 }}
               >
-                🔐 Login
+                📦 Orders
               </motion.li>
-            )}
 
-            {userData && (
               <motion.li
                 whileHover={{ backgroundColor: 'rgba(232, 244, 248, 0.8)' }}
-                className='px-[15px] py-[12px] cursor-pointer border-b border-[#b8dce8] font-semibold transition-colors'
-                onClick={handleLogout}
-              >
-                🚪 Logout
-              </motion.li>
-            )}
-
-            <motion.li
-              whileHover={{ backgroundColor: 'rgba(232, 244, 248, 0.8)' }}
-              className='px-[15px] py-[12px] cursor-pointer border-b border-[#b8dce8] font-semibold transition-colors'
-              onClick={() => {
-                navigate("/order");
-                setShowProfile(false);
-              }}
-            >
-              📦 Orders
-            </motion.li>
-
-            <motion.li
-              whileHover={{ backgroundColor: 'rgba(232, 244, 248, 0.8)' }}
-              className='px-[15px] py-[12px] cursor-pointer font-semibold transition-colors'
-              onClick={() => {
-                navigate("/about");
-                setShowProfile(false);
-              }}
-            >
-              ℹ️ About
-            </motion.li>
-          </ul>
-        </motion.div>
-      )}
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-          className='md:hidden border-t border-[#b8dce8] bg-white'
-        >
-          <div className='px-[20px] py-[15px] flex flex-col gap-[10px]'>
-            {[
-              { path: "/", label: "HOME" },
-              { path: "/collection", label: "PRODUCT" },
-              { path: "/about", label: "ABOUT" },
-              { path: "/contact", label: "CONTACT" }
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ x: 5 }}
+                className='px-[15px] py-[12px] cursor-pointer font-semibold transition-colors'
                 onClick={() => {
-                  navigate(item.path);
-                  setMobileMenuOpen(false);
+                  navigate("/about");
+                  setShowProfile(false);
                 }}
-                className='text-[#1488aa] hover:text-[#0a5f7a] cursor-pointer py-[10px] px-[12px] rounded-[8px] border border-[#b8dce8] hover:border-[#1488aa] hover:bg-[#e8f4f8] transition-all text-[14px] font-semibold'
               >
-                {item.label}
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      )}
-
-      {/* MOBILE BOTTOM NAV */}
-      <div className='fixed bottom-0 left-0 w-full h-[80px] nav-glass border-t border-[#b8dce8] md:hidden flex justify-between px-[15px] py-[10px] bg-white/95 backdrop-blur-sm shadow-[0_-2px_10px_rgba(20,136,170,0.1)]'>
-        {[
-          { path: "/", icon: <IoMdHome className='w-[24px] h-[24px]' />, label: "Home" },
-          { path: "/collection", icon: <HiOutlineCollection className='w-[24px] h-[24px]' />, label: "Collections" },
-          { path: "/contact", icon: <MdContacts className='w-[24px] h-[24px]' />, label: "Contact" },
-          { path: "/cart", icon: <MdOutlineShoppingCart className='w-[24px] h-[24px]' />, label: "Cart" }
-        ].map((item, i) => (
-          <motion.button
-            key={i}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => navigate(item.path)}
-            className='text-[#0a5f7a] flex flex-col items-center gap-[4px] text-[11px] font-semibold hover:text-[#1488aa] transition-colors'
-          >
-            <span className='text-[#1488aa] group-hover:text-[#0a5f7a]'>{item.icon}</span>
-            {item.label}
-          </motion.button>
-        ))}
-
-        {getCartCount() > 0 && (
-          <motion.span
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            className='absolute top-[10px] right-[32px] w-[22px] h-[22px] bg-gradient-to-br from-[#ea4335] to-[#fbbc04] text-white text-[9px] font-bold rounded-full flex items-center justify-center'
-          >
-            {getCartCount()}
-          </motion.span>
+                ℹ️ About
+              </motion.li>
+            </ul>
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </div>
   );
 }
