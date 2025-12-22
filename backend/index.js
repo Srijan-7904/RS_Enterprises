@@ -18,13 +18,26 @@ import Message from './model/messageModel.js'
 
 let port = process.env.PORT || 6000
 
+// Allow list for CORS origins (supports multiple via FRONTEND_URLS="url1,url2")
+const originsEnv = process.env.FRONTEND_URLS || process.env.FRONTEND_URL || ''
+const extraOrigins = originsEnv
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean)
+
+const allowedOrigins = [
+        'http://localhost:5173',
+        'http://localhost:5174',
+        ...extraOrigins
+]
+
 let app = express()
 const httpServer = createServer(app)
 
 // Socket.io setup
 const io = new Server(httpServer, {
     cors: {
-        origin: ["http://localhost:5173", "http://localhost:5174"],
+        origin: allowedOrigins,
         credentials: true
     }
 })
@@ -32,8 +45,8 @@ const io = new Server(httpServer, {
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
- origin:["http://localhost:5173" , "http://localhost:5174"],
- credentials:true
+ origin: allowedOrigins,
+ credentials: true
 }))
 
 app.use("/api/auth",authRoutes)
@@ -113,6 +126,11 @@ io.on('connection', (socket) => {
 httpServer.listen(port,()=>{
     console.log("Hello From Server")
     connectDb()
+})
+
+// Health endpoint for uptime checks
+app.get('/api/health', (req, res) => {
+    res.json({ ok: true, env: process.env.NODE_ENV || 'production' })
 })
 
 
