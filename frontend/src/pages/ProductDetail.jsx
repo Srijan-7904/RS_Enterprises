@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { shopDataContext } from '../context/ShopContext'
-import { authDataContext } from '../context/authContext'
+import { authDataContext } from '../context/AuthContext'
 import { userDataContext } from '../context/UserContext'
 import { FaStar, FaStarHalfAlt, FaShoppingCart, FaCheck, FaThumbsUp, FaTrash, FaEdit } from "react-icons/fa"
 import RelatedProduct from '../component/RelatedProduct'
