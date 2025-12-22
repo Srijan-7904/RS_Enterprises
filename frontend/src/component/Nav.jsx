@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import { userDataContext } from '../context/UserContext';
-import { authDataContext } from '../context/authContext';
+import { authDataContext } from '../context/AuthContext';
 import { shopDataContext } from '../context/ShopContext';
 import { ThemeContext } from '../context/ThemeContext';
 

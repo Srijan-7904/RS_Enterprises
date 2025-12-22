@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaComments, FaTimes, FaPaperPlane, FaCircle, FaEllipsisV } from 'react-icons/fa'
 import { userDataContext } from '../context/UserContext'
-import { authDataContext } from '../context/authContext'
+import { authDataContext } from '../context/AuthContext'
 import axios from 'axios'
 import { io } from 'socket.io-client'
 

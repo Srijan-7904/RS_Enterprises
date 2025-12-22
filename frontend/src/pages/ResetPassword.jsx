@@ -4,7 +4,7 @@ import Logo from "../assets/logo.png"
 import { useNavigate, useParams } from 'react-router-dom'
 import { IoEyeOutline, IoEye } from "react-icons/io5";
 import { MdLock } from "react-icons/md";
-import { authDataContext } from '../context/authContext';
+import { authDataContext } from '../context/AuthContext';
 import axios from 'axios';
 import Loading from '../component/Loading';
 import { toast } from 'react-toastify';

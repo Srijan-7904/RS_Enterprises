@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import Logo from "../assets/logo.png"
 import { useNavigate } from 'react-router-dom'
 import { MdEmail } from "react-icons/md";
-import { authDataContext } from '../context/authContext';
+import { authDataContext } from '../context/AuthContext';
 import axios from 'axios';
 import Loading from '../component/Loading';
 import { toast } from 'react-toastify';
