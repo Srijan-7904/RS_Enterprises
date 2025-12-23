@@ -172,7 +172,7 @@ function Nav() {
         </div>
 
         {/* RIGHT SECTION */}
-        <div className='flex items-center gap-[20px]'>
+        <div className='flex items-center gap-[12px] sm:gap-[15px] md:gap-[18px]'>
           
           {/* Search Icon */}
           <motion.div
@@ -182,9 +182,9 @@ function Nav() {
             onClick={() => setShowSearch(prev => !prev)}
           >
             {!showSearch ? (
-              <IoSearchOutline className='w-[28px] h-[28px] text-[#1488aa] hover:text-[#0a5f7a] transition-colors' />
+              <IoSearchOutline className='w-[22px] h-[22px] sm:w-[24px] sm:h-[24px] md:w-[26px] md:h-[26px] text-[#1488aa] hover:text-[#0a5f7a] transition-colors' />
             ) : (
-              <IoSearchSharp className='w-[28px] h-[28px] text-[#1488aa]' />
+              <IoSearchSharp className='w-[22px] h-[22px] sm:w-[24px] sm:h-[24px] md:w-[26px] md:h-[26px] text-[#1488aa]' />
             )}
           </motion.div>
 
@@ -196,10 +196,10 @@ function Nav() {
             onClick={() => setShowProfile(prev => !prev)}
           >
             {!userData ? (
-              <FaCircleUser className='w-[28px] h-[28px] text-[#1488aa] hover:text-[#0a5f7a] transition-colors' />
+              <FaCircleUser className='w-[22px] h-[22px] sm:w-[24px] sm:h-[24px] md:w-[26px] md:h-[26px] text-[#1488aa] hover:text-[#0a5f7a] transition-colors' />
             ) : (
               <motion.div
-                className='w-[36px] h-[36px] bg-gradient-to-br from-[#65d8f7] to-[#00d4ff] text-[#0a0a0a] rounded-full flex items-center justify-center font-bold text-[16px] cursor-pointer hover:shadow-[0_0_20px_rgba(101,216,247,0.5)] transition-all'
+                className='w-[30px] h-[30px] sm:w-[32px] sm:h-[32px] md:w-[36px] md:h-[36px] bg-gradient-to-br from-[#65d8f7] to-[#00d4ff] text-[#0a0a0a] rounded-full flex items-center justify-center font-bold text-[13px] sm:text-[14px] md:text-[16px] cursor-pointer hover:shadow-[0_0_20px_rgba(101,216,247,0.5)] transition-all'
                 whileHover={{ boxShadow: '0 0 25px rgba(101, 216, 247, 0.6)' }}
               >
                 {userData?.name?.charAt(0).toUpperCase()}
@@ -214,12 +214,12 @@ function Nav() {
             className='flex relative cursor-pointer z-10'
             onClick={() => navigate("/cart")}
           >
-            <MdOutlineShoppingCart className='w-[32px] h-[32px] text-[#1488aa] hover:text-[#0a5f7a] transition-colors' />
+            <MdOutlineShoppingCart className='w-[26px] h-[26px] sm:w-[28px] sm:h-[28px] md:w-[30px] md:h-[30px] text-[#1488aa] hover:text-[#0a5f7a] transition-colors' />
             {getCartCount() > 0 && (
               <motion.span
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className='absolute -top-[8px] -right-[8px] w-[24px] h-[24px] bg-gradient-to-br from-[#ea4335] to-[#fbbc04] text-white text-[11px] font-bold rounded-full flex items-center justify-center'
+                className='absolute -top-[6px] -right-[6px] sm:-top-[8px] sm:-right-[8px] w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] bg-gradient-to-br from-[#ea4335] to-[#fbbc04] text-white text-[10px] sm:text-[11px] font-bold rounded-full flex items-center justify-center'
               >
                 {getCartCount()}
               </motion.span>
@@ -237,9 +237,9 @@ function Nav() {
             }}
           >
             {mobileMenuOpen ? (
-              <FaTimes className='w-[28px] h-[28px]' />
+              <FaTimes className='w-[24px] h-[24px]' />
             ) : (
-              <FaBars className='w-[28px] h-[28px]' />
+              <FaBars className='w-[24px] h-[24px]' />
             )}
           </motion.button>
         </div>
