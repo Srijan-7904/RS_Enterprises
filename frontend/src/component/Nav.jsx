@@ -138,13 +138,13 @@ function Nav() {
         
         {/* LOGO */}
         <motion.div 
-          className='flex items-center gap-[10px] cursor-pointer'
+          className='flex items-center gap-[8px] sm:gap-[10px] cursor-pointer'
           onClick={() => navigate("/")}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <img src={logo} alt="logo" className='w-[40px] h-[40px]' />
-          <h1 className='text-[20px] font-extrabold flex bg-gradient-to-r from-[#65d8f7] via-[#00d4ff] to-[#65d8f7] bg-clip-text text-transparent'>RS Enterprises</h1>
+          <img src={logo} alt="logo" className='w-[35px] h-[35px] sm:w-[40px] sm:h-[40px]' />
+          <h1 className='text-[16px] sm:text-[18px] md:text-[20px] font-extrabold flex bg-gradient-to-r from-[#65d8f7] via-[#00d4ff] to-[#65d8f7] bg-clip-text text-transparent whitespace-nowrap'>RS Enterprises</h1>
         </motion.div>
 
         {/* MENU */}
