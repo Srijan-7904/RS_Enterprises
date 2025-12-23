@@ -77,7 +77,7 @@ function Hero({heroData,heroCount,setHeroCount}) {
   return (
     <div className='w-full md:w-[60%] h-[100%] relative' >
         <div 
-          className='absolute text-[#0a5f7a] text-[clamp(1rem,4vw,3.5rem)] left-[5%] md:left-[10%] top-[10px] sm:top-[30px] md:top-[70px] lg:top-[130px] font-bold w-[90%] md:w-[80%]'
+          className='hidden md:block absolute text-[#0a5f7a] text-[clamp(1rem,4vw,3.5rem)] left-[5%] md:left-[10%] top-[10px] sm:top-[30px] md:top-[70px] lg:top-[130px] font-bold w-[90%] md:w-[80%]'
         >
             <p className='leading-tight sm:leading-snug md:leading-normal break-words whitespace-normal'>
               {displayText1}
