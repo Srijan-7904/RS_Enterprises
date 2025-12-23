@@ -77,7 +77,7 @@ window.speechSynthesis.speak(utterence)
     openingSound.play()
     setActiveAi(true)
     }}>
-      <img src={ai} alt="" className={`w-[100px] cursor-pointer ${activeAi ? 'translate-x-[10%] translate-y-[-10%] scale-125 ' : 'translate-x-[0] translate-y-[0] scale-100'} transition-transform` } style={{
+      <img src={ai} alt="" className={`w-[60px] sm:w-[70px] md:w-[80px] lg:w-[90px] cursor-pointer ${activeAi ? 'translate-x-[10%] translate-y-[-10%] scale-125 ' : 'translate-x-[0] translate-y-[0] scale-100'} transition-transform` } style={{
         filter: ` ${activeAi?"drop-shadow(0px 0px 30px #00d2fc)":"drop-shadow(0px 0px 20px black)"}`
       }}/>
     </div>

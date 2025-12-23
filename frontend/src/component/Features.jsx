@@ -39,14 +39,14 @@ function Features() {
 
   return (
     <motion.div 
-      className='w-[100%] h-auto py-[60px] bg-gradient-to-r from-[#d4e9f2] via-[#e0eff5] to-[#d4e9f2]'
+      className='w-[100%] h-auto py-[40px] sm:py-[50px] md:py-[60px] bg-gradient-to-r from-[#d4e9f2] via-[#e0eff5] to-[#d4e9f2]'
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
     >
-      <div className='max-w-[1200px] mx-auto px-[20px]'>
+      <div className='max-w-[1200px] mx-auto px-[15px] sm:px-[20px]'>
         <motion.h2 
-          className='text-[40px] md:text-[50px] font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-[#0a5f7a] to-[#1488aa] mb-[50px]'
+          className='text-[28px] sm:text-[35px] md:text-[45px] lg:text-[50px] font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-[#0a5f7a] to-[#1488aa] mb-[30px] sm:mb-[40px] md:mb-[50px] px-[10px]'
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -55,20 +55,20 @@ function Features() {
           Why Choose RS Enterprises
         </motion.h2>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px] sm:gap-[25px] md:gap-[30px]'>
           {features.map((feature, idx) => (
             <motion.div
               key={idx}
               ref={el => featuresRef.current[idx] = el}
-              className='bg-white border border-[#b8dce8] rounded-xl p-8 text-center hover:border-[#1488aa] shadow-md'
+              className='bg-white border border-[#b8dce8] rounded-xl p-5 sm:p-6 md:p-8 text-center hover:border-[#1488aa] shadow-md'
               whileHover={{ 
                 boxShadow: '0 20px 50px rgba(20, 136, 170, 0.2)',
                 borderColor: '#1488aa'
               }}
             >
-              <div className='text-[50px] mb-4'>{feature.icon}</div>
-              <h3 className='text-[20px] font-bold text-[#1488aa] mb-2'>{feature.title}</h3>
-              <p className='text-[14px] text-[#2c5f6f]'>{feature.desc}</p>
+              <div className='text-[40px] sm:text-[45px] md:text-[50px] mb-3 sm:mb-4'>{feature.icon}</div>
+              <h3 className='text-[16px] sm:text-[18px] md:text-[20px] font-bold text-[#1488aa] mb-2'>{feature.title}</h3>
+              <p className='text-[12px] sm:text-[13px] md:text-[14px] text-[#2c5f6f]'>{feature.desc}</p>
             </motion.div>
           ))}
         </div>
