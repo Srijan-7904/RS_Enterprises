@@ -1,0 +1,44 @@
+services:
+  # Backend Web Service (already deployed)
+  - type: web
+    name: rs-enterprises-3
+    runtime: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: FRONTEND_URLS
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+
+  # Frontend Static Site
+  - type: web
+    name: rs-enterprises-frontend
+    runtime: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_SERVER_URL
+        value: https://rs-enterprises-3.onrender.com
+
+  # Admin Static Site
+  - type: web
+    name: rs-enterprises-admin
+    runtime: static
+    buildCommand: cd admin && npm install && npm run build
+    staticPublishPath: ./admin/dist
+    envVars:
+      - key: VITE_SERVER_URL
+        value: https://rs-enterprises-3.onrender.com
