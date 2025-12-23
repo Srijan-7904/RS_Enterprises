@@ -42,7 +42,7 @@ function Home() {
   
   return (
     <div className='overflow-x-hidden relative top-[0px]'>
-    <div className=' w-[100vw] lg:h-[80vh] md:h-[50vh] sm:h-[30vh] bg-white'>
+    <div className='w-[100vw] h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] bg-white'>
 
       <Backgound heroCount={heroCount}/>
       <Hero

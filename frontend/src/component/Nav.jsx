@@ -54,13 +54,12 @@ function Nav() {
     }
   };
 
-  // ===== AUTOCOMPLETE LOGIC =====
+
   const query = search?.trim() || "";
 
   const computeSuggestions = useMemo(() => {
     if (!query || query.length < 2) return [];
     const q = query.toLowerCase();
-    // Priority: name match, then category/subCategory
     const scored = products.map(p => {
       let score = 0;
       if (p.name?.toLowerCase().includes(q)) score += 3;

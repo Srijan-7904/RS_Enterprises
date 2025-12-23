@@ -77,19 +77,19 @@ function Hero({heroData,heroCount,setHeroCount}) {
   return (
     <div className='w-full md:w-[60%] h-[100%] relative' >
         <div 
-          className='absolute text-[#0a5f7a] text-[18px] sm:text-[24px] md:text-[40px] lg:text-[55px] left-[5%] md:left-[10%] top-[20px] sm:top-[40px] md:top-[90px] lg:top-[130px] font-bold w-[90%] md:w-[80%]'
+          className='absolute text-[#0a5f7a] text-[clamp(1rem,4vw,3.5rem)] left-[5%] md:left-[10%] top-[10px] sm:top-[30px] md:top-[70px] lg:top-[130px] font-bold w-[90%] md:w-[80%]'
         >
-            <p className='leading-tight break-words whitespace-normal'>
+            <p className='leading-tight sm:leading-snug md:leading-normal break-words whitespace-normal'>
               {displayText1}
               {showCursor1 && <span className='animate-pulse'>|</span>}
             </p>
-            <p className='leading-tight mt-2 break-words whitespace-normal'>
+            <p className='leading-tight sm:leading-snug md:leading-normal mt-1 sm:mt-2 break-words whitespace-normal'>
               {displayText2}
               {showCursor2 && <span className='animate-pulse'>|</span>}
             </p>
         </div>
         <motion.div 
-          className='absolute top-[140px] sm:top-[180px] md:top-[400px] lg:top-[500px] left-[5%] md:left-[10%] flex items-center justify-center gap-[10px]'
+          className='absolute top-[120px] sm:top-[150px] md:top-[350px] lg:top-[500px] left-[5%] md:left-[10%] flex items-center justify-center gap-[8px] md:gap-[10px]'
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
