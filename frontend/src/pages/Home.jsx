@@ -42,7 +42,7 @@ function Home() {
   
   return (
     <div className='overflow-x-hidden relative top-[0px]'>
-    <div className='w-[100vw] h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] bg-white'>
+    <div className='w-[100vw] h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] bg-white mt-[60px] md:mt-[70px] lg:mt-[80px]'>
 
       <Backgound heroCount={heroCount}/>
       <Hero
@@ -50,9 +50,6 @@ function Home() {
       setHeroCount={setHeroCount}
       heroData={heroData[heroCount]}
       />
-
-
-     
     </div>
     <Product/>
     <Features/>

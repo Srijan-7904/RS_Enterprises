@@ -89,7 +89,7 @@ function Hero({heroData,heroCount,setHeroCount}) {
             </p>
         </div>
         <motion.div 
-          className='absolute top-[120px] sm:top-[150px] md:top-[350px] lg:top-[500px] left-[5%] md:left-[10%] flex items-center justify-center gap-[8px] md:gap-[10px]'
+          className='absolute bottom-[20px] sm:bottom-[30px] md:top-[350px] lg:top-[500px] left-[50%] -translate-x-1/2 md:left-[10%] md:translate-x-0 flex items-center justify-center gap-[8px] md:gap-[10px]'
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
