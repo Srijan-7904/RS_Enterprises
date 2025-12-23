@@ -257,13 +257,13 @@ function Chat() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className='fixed bottom-[25px] right-[25px] z-50 w-[60px] h-[60px] bg-gradient-to-br from-[#1488aa] to-[#2d8a4d] text-white rounded-full shadow-lg flex items-center justify-center hover:shadow-[0_0_30px_rgba(20,136,170,0.5)] transition-all'
+        className='fixed bottom-[20px] right-[20px] sm:bottom-[25px] sm:right-[25px] z-50 w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] bg-gradient-to-br from-[#1488aa] to-[#2d8a4d] text-white rounded-full shadow-lg flex items-center justify-center hover:shadow-[0_0_30px_rgba(20,136,170,0.5)] transition-all'
       >
         {isOpen ? (
-          <FaTimes className='text-[24px]' />
+          <FaTimes className='text-[20px] sm:text-[24px]' />
         ) : (
           <>
-            <FaComments className='text-[28px]' />
+            <FaComments className='text-[24px] sm:text-[28px]' />
             {unreadCount > 0 && (
               <motion.span
                 initial={{ scale: 0 }}
@@ -285,16 +285,16 @@ function Chat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className='fixed bottom-[100px] right-[25px] w-[380px] h-[550px] bg-white rounded-lg shadow-2xl z-50 flex flex-col border-2 border-[#b8dce8]'
+            className='fixed bottom-[80px] right-[10px] sm:bottom-[100px] sm:right-[25px] w-[calc(100vw-20px)] max-w-[380px] h-[calc(100vh-120px)] max-h-[550px] bg-white rounded-lg shadow-2xl z-50 flex flex-col border-2 border-[#b8dce8]'
           >
             {/* Header */}
-            <div className='bg-gradient-to-r from-[#1488aa] to-[#2d8a4d] p-[15px] rounded-t-lg flex items-center justify-between'>
-              <div className='flex items-center gap-[10px]'>
-                <div className='w-[40px] h-[40px] bg-white/20 rounded-full flex items-center justify-center text-white font-bold'>
+            <div className='bg-gradient-to-r from-[#1488aa] to-[#2d8a4d] p-[10px] sm:p-[15px] rounded-t-lg flex items-center justify-between'>
+              <div className='flex items-center gap-[8px] sm:gap-[10px]'>
+                <div className='w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] bg-white/20 rounded-full flex items-center justify-center text-white font-bold text-[14px] sm:text-[16px]'>
                   S
                 </div>
                 <div>
-                  <h3 className='text-white font-bold text-[16px]'>Support Chat</h3>
+                  <h3 className='text-white font-bold text-[14px] sm:text-[16px]'>Support Chat</h3>
                   <div className='flex items-center gap-[5px]'>
                     <FaCircle className={`text-[8px] ${isConnected ? 'text-green-400' : 'text-gray-400'}`} />
                     <span className='text-white/80 text-[12px]'>
@@ -359,7 +359,7 @@ function Chat() {
             </div>
 
             {/* Messages Area */}
-            <div className='flex-1 overflow-y-auto p-[15px] bg-[#f5f9fc] space-y-[10px]'>
+            <div className='flex-1 overflow-y-auto p-[10px] sm:p-[15px] bg-[#f5f9fc] space-y-[10px]'>
               {messages.length === 0 ? (
                 <div className='h-full flex flex-col items-center justify-center text-center'>
                   <div>
@@ -380,13 +380,13 @@ function Chat() {
                     >
                       {!isOwn && <span className='text-[11px] text-[#5a8899] mb-[4px] ml-[4px]'>{msg.senderName || 'Support'}</span>}
                       <div
-                        className={`max-w-[75%] px-[12px] py-[8px] rounded-lg ${
+                        className={`max-w-[85%] sm:max-w-[75%] px-[10px] sm:px-[12px] py-[6px] sm:py-[8px] rounded-lg ${
                           isOwn
                             ? 'bg-gradient-to-r from-[#1488aa] to-[#2d8a4d] text-white'
                             : 'bg-white text-[#0a5f7a] border border-[#b8dce8]'
                         }`}
                       >
-                        <p className='text-[13px] break-words'>{msg.message}</p>
+                        <p className='text-[12px] sm:text-[13px] break-words'>{msg.message}</p>
                         <p
                           className={`text-[10px] mt-[4px] ${
                             isOwn ? 'text-white/70' : 'text-[#5a8899]'
@@ -501,23 +501,23 @@ function Chat() {
             )}
 
             {/* Input Area */}
-            <form onSubmit={handleSendMessage} className='p-[15px] border-t border-[#b8dce8]'>
-              <div className='flex gap-[10px]'>
+            <form onSubmit={handleSendMessage} className='p-[10px] sm:p-[15px] border-t border-[#b8dce8]'>
+              <div className='flex gap-[8px] sm:gap-[10px]'>
                 <input
                   type='text'
                   value={newMessage}
                   onChange={handleTyping}
                   placeholder='Type a message...'
-                  className='flex-1 px-[12px] py-[10px] border-2 border-[#b8dce8] rounded-lg bg-white text-[#0a5f7a] placeholder-[#5a8899] focus:outline-none focus:border-[#1488aa] text-[14px]'
+                  className='flex-1 px-[10px] sm:px-[12px] py-[8px] sm:py-[10px] border-2 border-[#b8dce8] rounded-lg bg-white text-[#0a5f7a] placeholder-[#5a8899] focus:outline-none focus:border-[#1488aa] text-[13px] sm:text-[14px]'
                 />
                 <motion.button
                   type='submit'
                   disabled={!newMessage.trim() || !isConnected}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className='w-[45px] h-[45px] bg-gradient-to-r from-[#1488aa] to-[#2d8a4d] text-white rounded-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg transition-all'
+                  className='w-[40px] h-[40px] sm:w-[45px] sm:h-[45px] bg-gradient-to-r from-[#1488aa] to-[#2d8a4d] text-white rounded-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg transition-all'
                 >
-                  <FaPaperPlane className='text-[16px]' />
+                  <FaPaperPlane className='text-[14px] sm:text-[16px]' />
                 </motion.button>
               </div>
             </form>

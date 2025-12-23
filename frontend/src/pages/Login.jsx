@@ -65,8 +65,8 @@ function Login() {
             
         }
     return (
-        <div className='w-[100vw] h-[100vh] bg-gradient-to-l from-[#f5f9fc] to-[#e8f4f8] flex items-center justify-center'>
-            <div className='max-w-[1000px] w-[95%] h-[80vh] rounded-lg overflow-hidden shadow-xl grid grid-cols-1 md:grid-cols-2 border-2 border-[#b8dce8]'>
+        <div className='w-[100vw] h-[100vh] bg-gradient-to-l from-[#f5f9fc] to-[#e8f4f8] flex items-center justify-center p-4'>
+            <div className='max-w-[1000px] w-full md:w-[95%] h-auto md:h-[80vh] rounded-lg overflow-hidden shadow-xl grid grid-cols-1 md:grid-cols-2 border-2 border-[#b8dce8]'>
 
                 {/* LEFT - Animated text / graphics */}
                 <div className='left-panel flex flex-col items-start justify-center p-10 bg-gradient-to-br from-[#1488aa] to-[#2d8a4d] text-white'>
@@ -78,10 +78,10 @@ function Login() {
                 </div>
 
                 {/* RIGHT - Form */}
-                <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className='right-panel flex items-center justify-center p-8 bg-white overflow-y-auto'>
-                      <form action="" onSubmit={handleLogin} className='w-full max-w-[360px] flex flex-col gap-4' aria-label='Login form'>
-                        <motion.div whileHover={{ scale: 1.02 }} onClick={googlelogin} className='w-full h-[48px] bg-white rounded-lg flex items-center justify-center gap-[10px] py-[8px] cursor-pointer border-2 border-[#b8dce8] hover:border-[#1488aa] transition-all shadow-sm hover:shadow-md'>
-                            <img src={google} alt="" className='w-[20px]'/> <span className='text-[#0a5f7a] font-semibold'>Continue with Google</span>
+                <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className='right-panel flex items-center justify-center p-4 sm:p-6 md:p-8 bg-white overflow-y-auto min-h-[500px]'>
+                      <form action="" onSubmit={handleLogin} className='w-full max-w-[360px] flex flex-col gap-4 relative z-10' aria-label='Login form'>
+                        <motion.div whileHover={{ scale: 1.02 }} onClick={googlelogin} className='w-full h-[48px] bg-white rounded-lg flex items-center justify-center gap-[10px] py-[8px] cursor-pointer border-2 border-[#b8dce8] hover:border-[#1488aa] transition-all shadow-sm hover:shadow-md relative z-20'>
+                            <img src={google} alt="" className='w-[20px] pointer-events-none'/> <span className='text-[#0a5f7a] font-semibold pointer-events-none'>Continue with Google</span>
                         </motion.div>
 
                         <div className='flex items-center gap-3 w-full'><div className='h-[1px] bg-[#b8dce8] flex-1'/><span className='text-[#3a5a65] font-semibold'>OR</span><div className='h-[1px] bg-[#b8dce8] flex-1'/></div>
